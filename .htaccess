@@ -1,0 +1,32 @@
+Options -Indexes
+DirectoryIndex index.html
+AddType application/manifest+json .webmanifest
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Una sola URL canónica: https://jxan.art/
+RewriteCond %{HTTP_HOST} ^www\.jxan\.art$ [NC]
+RewriteRule ^ https://jxan.art%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://jxan.art%{REQUEST_URI} [L,R=301]
+RewriteRule ^index\.html$ https://jxan.art/ [L,R=301]
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript text/javascript application/xml application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 hour"
+ExpiresByType text/html "access plus 0 seconds"
+ExpiresByType text/css "access plus 7 days"
+ExpiresByType application/javascript "access plus 7 days"
+ExpiresByType text/javascript "access plus 7 days"
+ExpiresByType image/jpeg "access plus 30 days"
+ExpiresByType image/png "access plus 30 days"
+ExpiresByType image/webp "access plus 30 days"
+ExpiresByType image/x-icon "access plus 30 days"
+ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

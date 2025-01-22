@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://jxan.art/sitemap.xml
